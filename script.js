@@ -18,7 +18,7 @@ var specialCharacter = {
   ],
   getLength: function() {
     var listLength = this.characters.length;
-    console.log(listLength);
+    // console.log(listLength);
     return listLength;
   },
 };
@@ -30,7 +30,7 @@ var numberCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    console.log(listLength);
+    // console.log(listLength);
     return listLength;
   },
 };
@@ -42,7 +42,7 @@ var uppercaseCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    console.log(listLength);
+    // console.log(listLength);
     return listLength;
   },
 };
@@ -54,7 +54,7 @@ var lowercaseCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    console.log(listLength);
+    // console.log(listLength);
     return listLength;
   },
 };
@@ -79,8 +79,8 @@ function writePassword() {
 
   passwordText.value = password;
 
-  // copyBtn.removeAttribute("disabled");
-  // copyBtn.focus();
+  copyBtn.removeAttribute("disabled");
+  copyBtn.focus();
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -95,22 +95,32 @@ function generatePassword() {
    //randomizing which character type we add
    var randomCharType = characterTypes[Math.floor(Math.random() * characterTypes.length)];
    var randomCharacter = randomCharType.characters[Math.floor(Math.random() * randomCharType.getLength())];
-   console.log(randomCharacter);
+  //  console.log(randomCharacter);
   randomPassword = randomPassword + randomCharacter;
  }
 
- console.log(randomPassword);
+//  console.log(randomPassword);
  return randomPassword;
 
 }
 //-----------------------------------------------------------------------------------------------------------------------------
 // copy password to clipboard
-// function copyToClipboard() {
-//   // BONUS 
-// }
+function copyToClipboard() {
+  // BONUS 
+
+  //selecting textarea
+  var copyText = document.getElementById("password");
+
+  copyText.select();
+
+  document.execCommand("copy");
+
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 // BONUS EVENT LISTENER
+copyBtn.addEventListener("click", copyToClipboard);
+
