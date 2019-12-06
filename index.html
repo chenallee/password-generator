@@ -5,27 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Password Generator</h1>
+  <body class="bg-light text-dark">
+    <div class="wrapper container bg-light">
+      <header class="m-3">
+        <h1 class="text-center">Password Generator</h1>
       </header>
-      <div class="card">
-        <div class="card-header">
-          <h2>Generate a Password</h2>
+      <div class="card m-5 p-2 shadow border-0">
+        <div class="card-header bg-white mx-3 py-4">
+          <h2 class="text-nowrap">Generate a Password</h2>
         </div>
         <div class="card-body">
-          <textarea
+          <textarea 
+            class="form-control bg-white text-center text-muted border-dashed"
             readonly
             id="password"
             placeholder="Your Secure Password"
             aria-label="Generated Password"
+            rows="5"
           ></textarea>
         </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+        <div class="card-footer bg-white mx-3 py-4">
+          <button type="button" id="generate" class="btn btn-danger rounded-pill">Generate Password</button>
+
         </div>
       </div>
     </div>
