@@ -2,12 +2,12 @@
 var generateBtn = document.querySelector("#generate");
 
 //-----------------------------------------------------------------------------------------------------------------------------
-  // create array of objects which are the character types
-  // > special character object includes:
-  // > numeric character object includes: 0-9
-  // > upper and lowercase A-Z / a-z
-  // ** should we do separate objects for uppercase and lowercase???
-  //for loop until reach random num length concatenate random from array length and random from object inside
+// create array of objects which are the character types
+// > special character object includes:
+// > numeric character object includes: 0-9
+// > upper and lowercase A-Z / a-z
+// ** should we do separate objects for uppercase and lowercase???
+//for loop until reach random num length concatenate random from array length and random from object inside
 //-----------------------------------------------------------------------------------------------------------------------------
 
 //character objects -----------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ var specialCharacter = {
   characters: [
     "!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "{", "\\", "]", "^", "_", "`", "{", "|", "}", "~"
   ],
-  getLength: function() {
+  getLength: function () {
     var listLength = this.characters.length;
     // console.log(listLength);
     return listLength;
@@ -60,16 +60,6 @@ var lowercaseCharacter = {
 };
 
 //-----------------------------------------------------------------------------------------------------------------------------
-// defining password specifications
-
-//defining password length... can prompt userinput here later
-var lengthMin = 8;
-var lengthMax = 128 - lengthMin;
-
-//we can change this to only include types user checks
-var characterTypes = [specialCharacter, numberCharacter, uppercaseCharacter, lowercaseCharacter];
-
-//-----------------------------------------------------------------------------------------------------------------------------
 // Write password to the #password input
 function writePassword() {
   specialCharacter.getLength();
@@ -86,21 +76,74 @@ function writePassword() {
 //-----------------------------------------------------------------------------------------------------------------------------
 // generate password
 function generatePassword() {
-  //random length 8 - 128 .. math * 120 + 8
+  /* -----
+  Ideally, I want to let the user press cancel and then exit out of the prompt and function without changing anything but i think i would have to change the writepassword function for that
+  ----- */
 
-  var randomLength = Math.floor(Math.random() * lengthMax) + lengthMin;
+  // ---------------------------------------------------------------------------------------- defining password specifications:
+
+  //first we run a loop that prompts user to input password length until they input a valid length ----------------------------
+  var lengthValid= false;
+  while (lengthValid === false) {
+    var passwordLength = prompt("How long should the password be between 8 - 128 characters?");
+
+    //if user picks a valid length
+    if (passwordLength >= 8 && passwordLength <= 128) {
+      lengthValid = true; //this will cause to exit loop bc it runs while lengthValid is false
+    } else {
+      alert("Please input a length between 8 and 128!");
+      //lengthValid remains false
+    }
+  }
+
+  //next we run a loop that prompt user to select character types until they select at least one character type ---------------
+  var typeChosen = false;
+
+  while (typeChosen === false){
+    var useSpec = confirm("Use special characters?");
+    var useNum = confirm("Use numeric characters?");
+    var useUpper = confirm("Use uppercase characters?");
+    var useLower = confirm("Use lowercase characters?");
+
+    if (useSpec || useNum || useUpper || useLower) {
+      //console.log("spec: " + useSpec + " | num: " + useNum + " | upper: " + useUpper + " | lower: " + useLower);
+      typeChosen = true; //this will cause to exit loop bc it runs while typeCHhosen is false
+    } else {
+      alert("Please select at least one character type to use.");
+      //typeChosen remains false
+    }
+  }
+
+  //we populate our characterTypes array with only the types the user specified
+  var characterTypes = [];
+  
+  if (useSpec){
+    characterTypes.push(specialCharacter);
+  } 
+  if (useNum){
+    characterTypes.push(numberCharacter);
+  }
+  if (useUpper){
+    characterTypes.push(uppercaseCharacter);
+  }
+  if (useLower){
+    characterTypes.push(lowercaseCharacter);
+  }
+
+  // ---------------------------- now that we have defined the password specifications, we can work on generating the password:
   var randomPassword = "";
 
- for (var i = 0; i < randomLength; i++){
-   //randomizing which character type we add
-   var randomCharType = characterTypes[Math.floor(Math.random() * characterTypes.length)];
-   var randomCharacter = randomCharType.characters[Math.floor(Math.random() * randomCharType.getLength())];
-  //  console.log(randomCharacter);
-  randomPassword = randomPassword + randomCharacter;
- }
+  for (var i = 0; i < passwordLength; i++) {
+    //randomizing which character type we add
+    var randomCharType = characterTypes[Math.floor(Math.random() * characterTypes.length)];
+    //randomizing which character we add (length to choose from depends on the type)
+    var randomCharacter = randomCharType.characters[Math.floor(Math.random() * randomCharType.getLength())];
+    //  console.log(randomCharacter);
+    randomPassword = randomPassword + randomCharacter;
+  }
 
-//  console.log(randomPassword);
- return randomPassword;
+  //  console.log(randomPassword);
+  return randomPassword;
 
 }
 //-----------------------------------------------------------------------------------------------------------------------------
