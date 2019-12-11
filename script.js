@@ -1,6 +1,5 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
 //-----------------------------------------------------------------------------------------------------------------------------
 // create array of objects which are the character types
 // > special character object includes:
@@ -71,6 +70,9 @@ function writePassword() {
 
   copyBtn.removeAttribute("disabled");
   copyBtn.focus();
+
+  //once copy button isn't disabled... allow tooltip to show so on click it can be toggled
+  jQuery("#copyBtn").tooltip("enable");
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +118,7 @@ function generatePassword() {
 
   //we populate our characterTypes array with only the types the user specified
   var characterTypes = [];
-  
+
   if (useSpec){
     characterTypes.push(specialCharacter);
   } 
@@ -151,6 +153,8 @@ function generatePassword() {
 function copyToClipboard() {
   // BONUS 
 
+  
+
   //selecting textarea
   var copyText = document.getElementById("password");
 
@@ -161,9 +165,18 @@ function copyToClipboard() {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------
+$("#copyBtn").tooltip("disable");
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 // BONUS EVENT LISTENER
 copyBtn.addEventListener("click", copyToClipboard);
 
+$("copyBtn").click(function () {
+  $("copyBtn").tooltip("show");
+});
+
+$("#copyBtn").mouseleave(function (){
+  $("copyBtn").tooltip("hide");
+});
