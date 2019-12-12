@@ -161,7 +161,10 @@ function copyToClipboard() {
   copyText.select();
 
   document.execCommand("copy");
-
+  $("#copyBtn").tooltip("show");
+  setTimeout(function(){
+    $("#copyBtn").tooltip("hide");
+  }, 1000);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -173,10 +176,14 @@ generateBtn.addEventListener("click", writePassword);
 // BONUS EVENT LISTENER
 copyBtn.addEventListener("click", copyToClipboard);
 
+/*
 $("copyBtn").click(function () {
   $("copyBtn").tooltip("show");
 });
+*/
 
+/*
 $("#copyBtn").mouseleave(function (){
   $("copyBtn").tooltip("hide");
 });
+*/
