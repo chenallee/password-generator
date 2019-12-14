@@ -17,7 +17,7 @@ var specialCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    // console.log(listLength);
+    
     return listLength;
   },
 };
@@ -29,7 +29,7 @@ var numberCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    // console.log(listLength);
+    
     return listLength;
   },
 };
@@ -41,7 +41,7 @@ var uppercaseCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    // console.log(listLength);
+   
     return listLength;
   },
 };
@@ -53,7 +53,7 @@ var lowercaseCharacter = {
   ],
   getLength: function () {
     var listLength = this.characters.length;
-    // console.log(listLength);
+    
     return listLength;
   },
 };
@@ -108,7 +108,7 @@ function generatePassword() {
     var useLower = confirm("Use lowercase characters?");
 
     if (useSpec || useNum || useUpper || useLower) {
-      //console.log("spec: " + useSpec + " | num: " + useNum + " | upper: " + useUpper + " | lower: " + useLower);
+      
       typeChosen = true; //this will cause to exit loop bc it runs while typeCHhosen is false
     } else {
       alert("Please select at least one character type to use.");
@@ -175,15 +175,3 @@ generateBtn.addEventListener("click", writePassword);
 
 // BONUS EVENT LISTENER
 copyBtn.addEventListener("click", copyToClipboard);
-
-/*
-$("copyBtn").click(function () {
-  $("copyBtn").tooltip("show");
-});
-*/
-
-/*
-$("#copyBtn").mouseleave(function (){
-  $("copyBtn").tooltip("hide");
-});
-*/
